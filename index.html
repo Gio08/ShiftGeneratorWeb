@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestione Turni Bi-settimanali</title>
+</head>
+<body>
+    <h1>Gestione Turni Bi-settimanali</h1>
+
+    <!-- Section to select the month and year -->
+    <div>
+        <label for="month">Select month:</label>
+        <input type="month" id="month" name="month" value="2024-01" onchange="updateShiftDays()">
+    </div>
+
+    <!-- Section to input group members -->
+    <div>
+        <h2>Groups</h2>
+        <!-- Input for the "Acustica" group -->
+        <div>
+            <label for="acustica">Acustica:</label>
+            <textarea id="acustica" name="acustica" rows="4" cols="50"></textarea>
+        </div>
+        <!-- Input for the "Microfonisti" group -->
+        <div>
+            <label for="microfonisti">Microfonisti:</label>
+            <textarea id="microfonisti" name="microfonisti" rows="4" cols="50"></textarea>
+        </div>
+        <!-- Input for the "Uscieri" group -->
+        <div>
+            <label for="uscieri">Uscieri:</label>
+            <textarea id="uscieri" name="uscieri" rows="4" cols="50"></textarea>
+        </div>
+    </div>
+
+    <!-- Section to handle exceptions and "skip turn" functionality -->
+    <div id="shifts-exceptions" style="display:none;">
+        <h2>Exceptions for Shifts</h2>
+        <!-- Dynamic list of exceptions and skip checkboxes will be generated here -->
+        <div id="exceptions-list"></div>
+    </div>
+
+    <!-- Button to generate shifts -->
+    <input type="button" value="Generate Shifts" onclick="generateShifts()">
+
+    <!-- Section to display the assigned shifts -->
+    <div id="shifts-output"></div>
+
+    <!-- Link to the JavaScript file containing the logic -->
+    <script src="shifts.js"></script>
+</body>
+</html>
