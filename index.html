@@ -13,20 +13,26 @@
         <input type="month" id="month" name="month" value="2024-01" onchange="updateShiftDays()">
     </div>
 
+    <!-- Section to configure the number of people for Acustica shifts -->
+    <div>
+        <label for="acustica-count">Number of people for Acustica per shift:</label>
+        <select id="acustica-count" name="acustica-count">
+            <option value="1">1 Person</option>
+            <option value="2" selected>2 People</option>
+        </select>
+    </div>
+
     <!-- Section to input group members -->
     <div>
         <h2>Groups</h2>
-        <!-- Input for the "Acustica" group -->
         <div>
             <label for="acustica">Acustica:</label>
             <textarea id="acustica" name="acustica" rows="4" cols="50"></textarea>
         </div>
-        <!-- Input for the "Microfonisti" group -->
         <div>
             <label for="microfonisti">Microfonisti:</label>
             <textarea id="microfonisti" name="microfonisti" rows="4" cols="50"></textarea>
         </div>
-        <!-- Input for the "Uscieri" group -->
         <div>
             <label for="uscieri">Uscieri:</label>
             <textarea id="uscieri" name="uscieri" rows="4" cols="50"></textarea>
@@ -36,7 +42,6 @@
     <!-- Section to handle exceptions and "skip turn" functionality -->
     <div id="shifts-exceptions" style="display:none;">
         <h2>Exceptions for Shifts</h2>
-        <!-- Dynamic list of exceptions and skip checkboxes will be generated here -->
         <div id="exceptions-list"></div>
     </div>
 
