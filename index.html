@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestione Turni Bi-settimanali</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Gestione Turni Bi-settimanali</h1>
@@ -10,15 +11,31 @@
     <!-- Section to select the month and year -->
     <div>
         <label for="month">Select month:</label>
-        <input type="month" id="month" name="month" value="2024-01" onchange="updateShiftDays()">
+        <input type="month" id="month" name="month" onchange="updateShiftDays()">
     </div>
 
-    <!-- Section to configure the number of people for each group per shift -->
+    <!-- Section to select two days of the week -->
+    <div>
+        <h2>Select Days for Shifts</h2>
+        <label for="days">Select exactly 2 days:</label>
+        <select id="days" name="days" multiple size="7" onchange="updateShiftDays()">
+            <option value="0">Sunday</option>
+            <option value="1">Monday</option>
+            <option value="2" selected>Tuesday</option>
+            <option value="3">Wednesday</option>
+            <option value="4">Thursday</option>
+            <option value="5">Friday</option>
+            <option value="6" selected>Saturday</option>
+        </select>
+        <p style="font-size: small;">(Hold Ctrl or Cmd to select multiple days)</p>
+    </div>
+
+    <!-- Section to configure number of people for each group per shift -->
     <div>
         <h2>Configuration for Groups</h2>
         <div>
             <label for="acustica-count">Number of people for Acustica per shift:</label>
-            <select id="acustica-count" name="acustica-count">
+            <select id="acustica-count" name="acustica-count" onchange="updateGroupsMembers()">
                 <option value="0">0 (No shift)</option>
                 <option value="1">1 Person</option>
                 <option value="2" selected>2 People</option>
@@ -26,7 +43,7 @@
         </div>
         <div>
             <label for="microfonisti-count">Number of people for Microfonisti per shift:</label>
-            <select id="microfonisti-count" name="microfonisti-count">
+            <select id="microfonisti-count" name="microfonisti-count" onchange="updateGroupsMembers()">
                 <option value="0">0 (No shift)</option>
                 <option value="1">1 Person</option>
                 <option value="2">2 People</option>
@@ -35,7 +52,7 @@
         </div>
         <div>
             <label for="uscieri-count">Number of people for Uscieri per shift:</label>
-            <select id="uscieri-count" name="uscieri-count">
+            <select id="uscieri-count" name="uscieri-count" onchange="updateGroupsMembers()">
                 <option value="0">0 (No shift)</option>
                 <option value="1">1 Person</option>
                 <option value="2">2 People</option>
@@ -45,20 +62,9 @@
     </div>
 
     <!-- Section to input group members -->
-    <div>
+    <div id="groups-members">
         <h2>Groups Members</h2>
-        <div>
-            <label for="acustica">Acustica:</label>
-            <textarea id="acustica" name="acustica" rows="4" cols="50"></textarea>
-        </div>
-        <div>
-            <label for="microfonisti">Microfonisti:</label>
-            <textarea id="microfonisti" name="microfonisti" rows="4" cols="50"></textarea>
-        </div>
-        <div>
-            <label for="uscieri">Uscieri:</label>
-            <textarea id="uscieri" name="uscieri" rows="4" cols="50"></textarea>
-        </div>
+        <div id="groups-members-content"></div>
     </div>
 
     <!-- Section to handle exceptions and "skip turn" functionality -->
@@ -73,7 +79,19 @@
     <!-- Section to display the assigned shifts -->
     <div id="shifts-output"></div>
 
-    <!-- Link to the JavaScript file containing the logic -->
+    <!-- Link to the JavaScript file -->
     <script src="shifts.js"></script>
+
+    <!-- Script to set the current month automatically -->
+    <script>
+    window.onload = function() {
+        const today = new Date();
+        const month = (today.getMonth() + 1).toString().padStart(2, '0');
+        const year = today.getFullYear();
+        document.getElementById('month').value = `${year}-${month}`;
+        updateShiftDays();
+        updateGroupsMembers();
+    };
+    </script>
 </body>
 </html>
