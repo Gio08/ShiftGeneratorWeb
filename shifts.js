@@ -30,7 +30,10 @@ function generateShifts() {
     const year = new Date(monthYear).getFullYear();
     const daysInMonth = new Date(year, month, 0).getDate();
 
-    const acusticaCount = parseInt(document.getElementById('acustica-count').value); // Get the number of people for Acustica
+    const acusticaCount = parseInt(document.getElementById('acustica-count').value);
+    const microfonistiCount = parseInt(document.getElementById('microfonisti-count').value);
+    const uscieriCount = parseInt(document.getElementById('uscieri-count').value);
+
     const acustica = document.getElementById('acustica').value.trim().split('\n');
     const microfonisti = document.getElementById('microfonisti').value.trim().split('\n');
     const uscieri = document.getElementById('uscieri').value.trim().split('\n');
@@ -52,10 +55,9 @@ function generateShifts() {
                 const exceptions = new Set(document.getElementById(`exception_${formattedDate}`).value.trim().split('\n').filter(Boolean));
                 const alreadyAssigned = new Set();
 
-                // Use acusticaCount for the number of people in the Acustica group
-                const acusticaAssigned = balancedAssignRandom(acustica, shiftCount.acustica, exceptions, alreadyAssigned, acusticaCount);
-                const microfonistiAssigned = balancedAssignRandom(microfonisti, shiftCount.microfonisti, exceptions, alreadyAssigned, 3);
-                const uscieriAssigned = balancedAssignRandom(uscieri, shiftCount.uscieri, exceptions, alreadyAssigned, 3);
+                const acusticaAssigned = acusticaCount > 0 ? balancedAssignRandom(acustica, shiftCount.acustica, exceptions, alreadyAssigned, acusticaCount) : [];
+                const microfonistiAssigned = microfonistiCount > 0 ? balancedAssignRandom(microfonisti, shiftCount.microfonisti, exceptions, alreadyAssigned, microfonistiCount) : [];
+                const uscieriAssigned = uscieriCount > 0 ? balancedAssignRandom(uscieri, shiftCount.uscieri, exceptions, alreadyAssigned, uscieriCount) : [];
 
                 shifts.push({
                     date: formattedDate,
